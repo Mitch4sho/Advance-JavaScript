@@ -136,29 +136,26 @@
 // console.log(rates);
 
 
-// function interviewQuestion(job) {
-//     if (job === 'designer') {
-//         return function (name) {
-//             console.log(name + ', can you please explain what UX design is')
-//         }
-//     } else if (job === 'teacher') {
-//         return function (name) {
-//             console.log('what subject do you teach, ' + name + '?')
-//         }
-//     } else {
-//         return function (name) {
-//             console.log('Hello ' + name + ' what do you do?');
-//         }
-//     }
-// }
+function interviewQuestion(job) {
+    if (job === 'designer') {
+        return function (name) {
+            console.log(name + ', can you please explain what UX design is')
+        }
+    } else if (job === 'teacher') {
+        return function (name) {
+            console.log('what subject do you teach, ' + name + '?')
+        }
+    } else {
+        return function (name) {
+            console.log('Hello ' + name + ' what do you do?');
+        }
+    }
+}
 
-
-// //this is ;one variable that ask a question and is a function now 
-// var teacherQuestion = interviewQuestion('teacher');
-// var designerQuestion = interviewQuestion('designer');
-// // a function will be called now with the anonymous function is now the teacherQuestion();
-// teacherQuestion('John')
-// designerQuestion("Pam")
+var teacherQuestion = interviewQuestion('teacher');
+var designerQuestion = interviewQuestion('designer');
+teacherQuestion('John')
+designerQuestion("Pam")
 
 
 // // another way to call a function within a function 
@@ -192,14 +189,37 @@
 function retirement(retirementAge) {
     var a = ' years left until retirement.';
     return function (yearOfBirth) {
-        var age = 2016 - yearOfBirth;
+        var age = 2020 - yearOfBirth;
         console.log((retirementAge - age) + a);
     }
 }
 
 var retirementUS = retirement(66);
-retirementUS(1990);
+var retirementGermany = retirement(65);
+var retirementIceland = retirement(67);
+
+retirementGermany(1991);
+retirementIceland(1991);
+retirementUS(1991);
+
+// // Shorthand way of calling a function
+// retirement(66)(1991);
 
 
-// Shorthand way of calling a function
-retirement(66)(1990);
+// Exercise on Closures 
+
+function interviewQuestions(job) {
+    return function (name) {
+        if (job === 'designer') {
+            console.log(name + ', can you please explain what UX design is');
+
+        } else if (job === 'teacher') {
+            console.log('what subject do you teach, ' + name + '?')
+
+        } else {
+            console.log('Hello ' + name + ' what do you do?');
+        }
+    }
+}
+
+interviewQuestions('designer')('Sue');
