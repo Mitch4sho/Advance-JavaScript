@@ -240,7 +240,7 @@ var john = {
         } else if (style === 'friendly') {
             console.log('Hey! What\'s up? I\'m ' +
                 this.name + ', I\'m a ' +
-                this.job + ' and I\'m' +
+                this.job + ' and I\'m ' +
                 this.age + ' years old. have a nice a ' + timeOfDay + '.')
         }
     }
@@ -256,3 +256,54 @@ var emily = {
 john.presentation('formal', 'morning');
 
 john.presentation.call(emily, 'friendly', 'afternoon');
+
+//Bind Method 
+var johnFriendly =
+    john.presentation.bind(john, 'friendly');
+
+johnFriendly('morning');
+johnFriendly('night');
+
+var emilyFormal =
+    john.presentation.bind(emily, 'formal');
+emilyFormal('afternoon');
+
+
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+    var arrRes = [];
+    for (var i = 0; i < arr.length; i++) {
+        arrRes.push(fn(arr[i]));
+    }
+    return arrRes;
+}
+
+function calculateAge(el) {
+    var year = new Date().getFullYear();
+    return year - el;
+}
+
+function isFullAge(ageLimit, el) {
+
+    if (el >= ageLimit) {
+        return 'yes'
+    } else {
+        return 'no'
+    }
+}
+
+// what if we wanted to certain functions above for different countries 
+// example: 
+
+
+//converting into the age of the person
+var ages = arrayCalc(years, calculateAge);
+
+// now we are taking the age and seeing if the person is of full age in a certain country
+var fullAgeJapan = arrayCalc(ages,
+    // using the isFullage function from above to set as the default calculation for japan  
+    isFullAge.bind(this, 20));
+
+console.log(ages);
+console.log(fullAgeJapan);
