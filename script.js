@@ -136,26 +136,26 @@
 // console.log(rates);
 
 
-function interviewQuestion(job) {
-    if (job === 'designer') {
-        return function (name) {
-            console.log(name + ', can you please explain what UX design is')
-        }
-    } else if (job === 'teacher') {
-        return function (name) {
-            console.log('what subject do you teach, ' + name + '?')
-        }
-    } else {
-        return function (name) {
-            console.log('Hello ' + name + ' what do you do?');
-        }
-    }
-}
+// function interviewQuestion(job) {
+//     if (job === 'designer') {
+//         return function (name) {
+//             console.log(name + ', can you please explain what UX design is')
+//         }
+//     } else if (job === 'teacher') {
+//         return function (name) {
+//             console.log('what subject do you teach, ' + name + '?')
+//         }
+//     } else {
+//         return function (name) {
+//             console.log('Hello ' + name + ' what do you do?');
+//         }
+//     }
+// }
 
-var teacherQuestion = interviewQuestion('teacher');
-var designerQuestion = interviewQuestion('designer');
-teacherQuestion('John')
-designerQuestion("Pam")
+// var teacherQuestion = interviewQuestion('teacher');
+// var designerQuestion = interviewQuestion('designer');
+// teacherQuestion('John')
+// designerQuestion("Pam")
 
 
 // // another way to call a function within a function 
@@ -186,40 +186,73 @@ designerQuestion("Pam")
 
 // Closures 
 
-function retirement(retirementAge) {
-    var a = ' years left until retirement.';
-    return function (yearOfBirth) {
-        var age = 2020 - yearOfBirth;
-        console.log((retirementAge - age) + a);
-    }
-}
+// function retirement(retirementAge) {
+//     var a = ' years left until retirement.';
+//     return function (yearOfBirth) {
+//         var age = 2020 - yearOfBirth;
+//         console.log((retirementAge - age) + a);
+//     }
+// }
 
-var retirementUS = retirement(66);
-var retirementGermany = retirement(65);
-var retirementIceland = retirement(67);
+// var retirementUS = retirement(66);
+// var retirementGermany = retirement(65);
+// var retirementIceland = retirement(67);
 
-retirementGermany(1991);
-retirementIceland(1991);
-retirementUS(1991);
+// retirementGermany(1991);
+// retirementIceland(1991);
+// retirementUS(1991);
 
-// // Shorthand way of calling a function
-// retirement(66)(1991);
+// // // Shorthand way of calling a function
+// // retirement(66)(1991);
 
 
-// Exercise on Closures 
+// // Exercise on Closures 
 
-function interviewQuestions(job) {
-    return function (name) {
-        if (job === 'designer') {
-            console.log(name + ', can you please explain what UX design is');
+// function interviewQuestions(job) {
+//     return function (name) {
+//         if (job === 'designer') {
+//             console.log(name + ', can you please explain what UX design is');
 
-        } else if (job === 'teacher') {
-            console.log('what subject do you teach, ' + name + '?')
+//         } else if (job === 'teacher') {
+//             console.log('what subject do you teach, ' + name + '?')
 
-        } else {
-            console.log('Hello ' + name + ' what do you do?');
+//         } else {
+//             console.log('Hello ' + name + ' what do you do?');
+//         }
+//     }
+// }
+
+// interviewQuestions('designer')('Sue');
+
+
+// Bind, Call and Apply
+
+var john = {
+    name: 'John',
+    age: 26,
+    job: 'teacher',
+    presentation: function (style, timeOfDay) {
+        if (style === 'formal') {
+            console.log('Good ' + timeOfDay + ' ladies and gentlemen! I\'m ' +
+                this.name + ' ,I\'m a ' +
+                this.job + ' and I\'m ' +
+                this.age + ' years old.')
+        } else if (style === 'friendly') {
+            console.log('Hey! What\'s up? I\'m ' +
+                this.name + ', I\'m a ' +
+                this.job + ' and I\'m' +
+                this.age + ' years old. have a nice a ' + timeOfDay + '.')
         }
     }
 }
 
-interviewQuestions('designer')('Sue');
+// another Object 
+var emily = {
+    name: 'Emily',
+    age: 35,
+    job: 'designer'
+}
+
+john.presentation('formal', 'morning');
+
+john.presentation.call(emily, 'friendly', 'afternoon');
