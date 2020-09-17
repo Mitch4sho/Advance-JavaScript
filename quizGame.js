@@ -45,6 +45,65 @@
 // how to protect the code with a IIFE 
 
 
+// (function () {
+//     function Question(question, answers, correctAnswer) {
+//         this.question = question;
+//         this.answers = answers;
+//         this.correctAnswer = correctAnswer;
+//     }
+
+//     // creating a method to display the questions and the answers 
+
+//     Question.prototype.displayQuestion = function () {
+//         console.log(this.question);
+
+//         for (var i = 0; i < this.answers.length; i++) {
+//             console.log(i + ':' + this.answers[i]);
+//         }
+//     }
+
+//     // another prototype 
+//     Question.prototype.checkAnswer = function () {
+//         if (userAnswer === this.correctAnswer) {
+//             console.log('your right!');
+//         } else {
+//             console.log('not correct');
+//         }
+
+//         // creating questions 
+
+//     }
+//     var q1 = new Question(
+//         'whats my name?',
+//         ['john', 'mike', 'michelle'],
+//         0);
+
+//     var q2 = new Question(
+//         'wait a minute.. who are you?',
+//         ['Mitchell', 'Marquis', 'Lorenzo'],
+//         0);
+
+//     var q3 = new Question(
+//         'How many kids do you have?',
+//         ['40 kids', '2 kids', '10 kids'],
+//         1);
+
+//     // storing answers in a array 
+//     var questions = [q1, q2, q3];
+
+//     var n = Math.floor(Math.random() * questions.length);
+//     // calling the prototype function
+//     questions[n].displayQuestion();
+
+
+//     // checking the answer
+//     var userAnswer = parseInt(prompt('Please select the correct answer')); // getting the user answer 
+
+//     questions[n].checkAnswer();
+// })();
+
+// expert level
+
 (function () {
     function Question(question, answers, correctAnswer) {
         this.question = question;
@@ -63,9 +122,11 @@
     }
 
     // another prototype 
-    Question.prototype.checkAnswer = function () {
-        if (userAnswer === this.correctAnswer) {
+    Question.prototype.checkAnswer = function (ans) {
+        if (ans === this.correctAnswer) {
             console.log('your right!');
+            score++;
+            console.log('your score: ' + score);
         } else {
             console.log('not correct');
         }
@@ -88,21 +149,26 @@
         ['40 kids', '2 kids', '10 kids'],
         1);
 
-    // storing answers in a array 
+
     var questions = [q1, q2, q3];
+    var score = 0;
 
-    var n = Math.floor(Math.random() * questions.length);
-    // calling the prototype function
-    questions[n].displayQuestion();
+    function nextQuestion() {
+        // storing answers in a array 
+
+        var n = Math.floor(Math.random() * questions.length);
+        // calling the prototype function
+        questions[n].displayQuestion();
 
 
-    // checking the answer
-    var userAnswer = parseInt(prompt('Please select the correct answer')); // getting the user answer 
+        // checking the answer
+        var userAnswer = prompt('Please select the correct answer'); // getting the user answer 
 
-    questions[n].checkAnswer();
+        if (userAnswer !== 'exit') {
+            questions[n].checkAnswer(parseInt(userAnswer));
+
+            nextQuestion();
+        }
+    }
+    nextQuestion();
 })();
-
-
-function nextQuestion() {
-
-}
